@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BaconPomodoro - ポモドーロタイマー &amp; TODOリスト</title>
+  <meta name="description" content="シンプルなポモドーロタイマーとTODOリスト。集中力を高めて効率的に作業をこなしましょう。" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body data-page="index">
+
+  <header class="site-header">
+    <a href="index.html" class="site-logo">
+      <span class="logo-icon">🥓</span>
+      <span class="logo-text">Bacon<span class="accent">Pomodoro</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="about.html"   data-i18n="nav_about">About</a>
+      <a href="privacy.html" data-i18n="nav_privacy">プライバシーポリシー</a>
+      <a href="contact.html" data-i18n="nav_contact">お問い合わせ</a>
+      <button id="langBtn" class="lang-btn">日本語</button>
+    </nav>
+  </header>
+
+  <div class="page-wrapper">
+    <main class="main-layout">
+
+      <!-- ── Timer Column ── -->
+      <div class="timer-col">
+        <div class="card">
+          <div class="mode-tabs">
+            <button class="mode-tab active" data-mode="pomodoro" data-i18n="mode_pomodoro">ポモドーロ</button>
+            <button class="mode-tab"        data-mode="short"    data-i18n="mode_short">短い休憩</button>
+            <button class="mode-tab"        data-mode="long"     data-i18n="mode_long">長い休憩</button>
+          </div>
+
+          <div class="timer-wrap">
+            <div class="ring-container">
+              <svg viewBox="0 0 190 190">
+                <circle class="ring-bg"       cx="95" cy="95" r="83"/>
+                <circle class="ring-progress" id="ringProgress" cx="95" cy="95" r="83"/>
+              </svg>
+              <div class="timer-label">
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="mode-label"    id="modeLabel">集中</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn-icon" id="resetBtn"
+              data-i18n-title="btn_reset_title" title="リセット">↺</button>
+            <button class="btn-primary" id="startBtn">スタート</button>
+            <button class="btn-icon" id="skipBtn"
+              data-i18n-title="btn_skip_title" title="スキップ">⏭</button>
+          </div>
+
+          <div class="session-info">
+            <div class="session-dots" id="sessionDots"></div>
+            <span class="session-count" id="sessionCount">0 セッション完了</span>
+            <button class="btn-reset-session" id="resetSessionBtn"
+              data-i18n-title="reset_session_title" title="セッション数をリセット">↺</button>
+          </div>
+
+          <!-- Settings -->
+          <div class="settings-toggle" id="settingsToggle">
+            <span class="settings-label-text" data-i18n="settings_label">⚙ 時間設定</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="settings-panel" id="settingsPanel">
+            <div class="setting-row">
+              <label data-i18n="set_pomo">ポモドーロ（分）</label>
+              <input type="number" id="setPomo" min="1" max="60" value="25" />
+            </div>
+            <div class="setting-row">
+              <label data-i18n="set_short_label">短い休憩（分）</label>
+              <input type="number" id="setShort" min="1" max="30" value="5" />
+            </div>
+            <div class="setting-row">
+              <label data-i18n="set_long_label">長い休憩（分）</label>
+              <input type="number" id="setLong" min="1" max="60" value="15" />
+            </div>
+            <div class="setting-row">
+              <label data-i18n="set_interval">長い休憩の間隔</label>
+              <input type="number" id="setLongInterval" min="2" max="10" value="4" />
+            </div>
+            <div class="setting-row">
+              <label data-i18n="set_auto_break">休憩を自動スタート</label>
+              <input type="checkbox" id="setAutoBreak" />
+            </div>
+            <div class="setting-row">
+              <label data-i18n="set_auto_pomo">ポモドーロを自動スタート</label>
+              <input type="checkbox" id="setAutoPomo" />
+            </div>
+            <button class="btn-apply" id="applySettings" data-i18n="btn_apply">適用</button>
+          </div>
+        </div>
+      </div><!-- /timer-col -->
+
+      <!-- ── TODO Column ── -->
+      <div class="todo-col">
+        <div class="card">
+          <div class="todo-card-header">
+            <h2 data-i18n="todo_title">タスク</h2>
+            <button class="btn-clear" id="clearDoneBtn" data-i18n="btn_clear_done">完了済みを削除</button>
+          </div>
+          <div class="todo-input-row">
+            <input class="todo-input" id="todoInput" type="text"
+              placeholder="タスクを追加..." maxlength="100"
+              data-i18n-placeholder="todo_placeholder" />
+            <button class="btn-add" id="addTodoBtn">＋</button>
+          </div>
+          <div class="todo-list" id="todoList"></div>
+          <div class="todo-empty" id="todoEmpty"
+            data-i18n-html="todo_empty">タスクがありません。<br>上に追加してください。</div>
+        </div>
+      </div><!-- /todo-col -->
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="about.html"   data-i18n="nav_about">About</a>
+      <span class="sep">|</span>
+      <a href="privacy.html" data-i18n="nav_privacy">プライバシーポリシー</a>
+      <span class="sep">|</span>
+      <a href="contact.html" data-i18n="nav_contact">お問い合わせ</a>
+    </div>
+    <p data-i18n="footer_copy">© 2026 BaconPomodoro by iroiro</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1c1c28;
+  --surface: #252535;
+  --surface2: #2e2e42;
+  --border: #3a3a52;
+  --text: #e8e8f0;
+  --text-muted: #888899;
+  --accent: #e05c5c;
+  --radius: 12px;
+  --transition: 0.25s ease;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+/* ─── Site Header ─── */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.site-logo .logo-icon { font-size: 1.3rem; line-height: 1; }
+.site-logo .logo-text { font-size: 1rem; font-weight: 700; letter-spacing: 0.02em; }
+.site-logo .accent { color: var(--accent); }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.site-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.site-nav a:hover { color: var(--text); background: var(--surface2); }
+
+/* Language toggle button */
+.lang-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 5px 11px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.lang-btn:hover { color: var(--text); border-color: var(--accent); }
+
+/* ─── Page wrapper ─── */
+.page-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 48px;
+}
+
+/* ─── Site Footer ─── */
+.site-footer {
+  text-align: center;
+  padding: 18px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.site-footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.76rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+.site-footer a:hover { color: var(--text); }
+.site-footer .sep { color: var(--border); font-size: 0.76rem; }
+.site-footer p { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ─── Static page content ─── */
+.page-content {
+  width: 100%;
+  max-width: 720px;
+}
+.page-content h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.page-content .updated {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.page-content h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 26px 0 9px;
+  color: var(--accent);
+}
+.page-content p {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.page-content a { color: var(--accent); }
+.page-content ul,
+.page-content ol { margin: 6px 0 12px 20px; }
+.page-content li {
+  font-size: 0.875rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+}
+
+/* Contact info box */
+.info-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px 0;
+  margin: 14px 0;
+}
+.info-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.info-row:last-child { border-bottom: none; }
+.info-label {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  min-width: 88px;
+  flex-shrink: 0;
+}
+.info-value { font-size: 0.875rem; color: var(--text); }
+.info-value a { color: var(--accent); text-decoration: none; }
+.info-value a:hover { text-decoration: underline; }
+
+.note-box {
+  background: var(--surface2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
