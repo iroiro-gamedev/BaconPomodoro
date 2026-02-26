@@ -126,6 +126,17 @@
               <label data-i18n="set_auto_pomo">ポモドーロを自動スタート</label>
               <input type="checkbox" id="setAutoPomo" />
             </div>
+            <div class="setting-row">
+              <label data-i18n="set_volume">音量</label>
+              <div class="volume-wrap">
+                <input type="range" id="setVolume" min="0" max="100" value="80" />
+                <span class="volume-val" id="volumeVal">80</span>
+              </div>
+            </div>
+            <div class="setting-row">
+              <label data-i18n="set_end_sound">終了音</label>
+              <select id="setEndSound"></select>
+            </div>
             <button class="btn-apply" id="applySettings" data-i18n="btn_apply">適用</button>
           </div>
         </div>

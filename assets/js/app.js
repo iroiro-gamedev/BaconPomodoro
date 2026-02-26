@@ -11,11 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
     remove: (k)    => localStorage.removeItem(k),
   };
 
+  /* ── Sound options ───────────────────────────────────────── */
+  const SOUND_OPTIONS = [
+    { file: '鳩時計.mp3',         key: 'sound_hato' },
+    { file: 'ニワトリの鳴き声.mp3', key: 'sound_niwatori' },
+    { file: '犬の鳴き声.mp3',      key: 'sound_inu' },
+    { file: '猫の鳴き声.mp3',      key: 'sound_neko' },
+  ];
+
   /* ── Initial state ───────────────────────────────────────── */
   const settings = store.get('bp_settings', {
     pomodoro: 25, short: 5, long: 15, longInterval: 4,
     autoBreak: false, autoPomo: false,
+    volume: 80, endSound: '鳩時計.mp3',
   });
+  // migrate older saves that lack sound keys
+  if (settings.volume   === undefined) settings.volume   = 80;
+  if (!settings.endSound)              settings.endSound  = '鳩時計.mp3';
 
   let todos = store.get('bp_todos', []);
 
@@ -54,6 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const setAutoBreak    = document.getElementById('setAutoBreak');
   const setAutoPomo     = document.getElementById('setAutoPomo');
   const applySettingsBtn= document.getElementById('applySettings');
+  const setVolume       = document.getElementById('setVolume');
+  const volumeVal       = document.getElementById('volumeVal');
+  const setEndSound     = document.getElementById('setEndSound');
+
+  /* ── Audio ───────────────────────────────────────────────── */
+  const startAudio = new Audio('assets/se/決定音.mp3');
+  const endAudio   = new Audio();
+
+  function playStartSound() {
+    startAudio.currentTime = 0;
+    startAudio.volume = settings.volume / 100;
+    startAudio.play().catch(() => {});
+  }
+
+  function playEndSound() {
+    endAudio.src = 'assets/se/' + settings.endSound;
+    endAudio.currentTime = 0;
+    endAudio.volume = settings.volume / 100;
+    endAudio.play().catch(() => {});
+  }
 
   /* ── Ring setup ──────────────────────────────────────────── */
   ringProgress.style.strokeDasharray  = CIRCUMFERENCE;
@@ -150,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
       state.running = false;
       document.title = 'BaconPomodoro';
     } else {
+      playStartSound();
       state.timerId = setInterval(tick, 1000);
       state.running = true;
     }
@@ -175,6 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function onComplete(skipped = false) {
     document.title = 'BaconPomodoro';
+    if (!skipped) playEndSound();
 
     if (state.mode === 'pomodoro' && !skipped) {
       state.sessions++;
@@ -221,6 +255,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── Settings ────────────────────────────────────────────── */
+  function populateSoundSelect() {
+    const current = settings.endSound;
+    setEndSound.innerHTML = '';
+    SOUND_OPTIONS.forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt.file;
+      o.textContent = I18n.t(opt.key);
+      if (opt.file === current) o.selected = true;
+      setEndSound.appendChild(o);
+    });
+  }
+
   function populateSettingsUI() {
     setPomo.value         = settings.pomodoro;
     setShort.value        = settings.short;
@@ -228,6 +274,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setLongInterval.value = settings.longInterval;
     setAutoBreak.checked  = settings.autoBreak;
     setAutoPomo.checked   = settings.autoPomo;
+    setVolume.value       = settings.volume;
+    volumeVal.textContent = settings.volume;
+    populateSoundSelect();
   }
 
   /* ── TODO rendering ──────────────────────────────────────── */
@@ -341,10 +390,17 @@ document.addEventListener('DOMContentLoaded', () => {
     settings.longInterval = Math.min(10, Math.max(2, parseInt(setLongInterval.value) || 4));
     settings.autoBreak    = setAutoBreak.checked;
     settings.autoPomo     = setAutoPomo.checked;
+    settings.volume       = Math.min(100, Math.max(0, parseInt(setVolume.value) || 80));
+    settings.endSound     = setEndSound.value || '鳩時計.mp3';
     store.set('bp_settings', settings);
     switchMode(state.mode);
     updateSessionUI();
     showToast(I18n.t('toast_settings_saved'));
+  });
+
+  // Volume display
+  setVolume.addEventListener('input', () => {
+    volumeVal.textContent = setVolume.value;
   });
 
   // + button visibility
@@ -368,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateStartBtn();
     updateSessionUI();
     renderTodos();
-    // update title/placeholder attrs handled by i18n.js via data-i18n-title / data-i18n-placeholder
+    populateSoundSelect();
   });
 
   /* ── Boot ────────────────────────────────────────────────── */

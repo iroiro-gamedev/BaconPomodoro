@@ -53,6 +53,12 @@ window.I18n = (() => {
       set_interval:     '長い休憩の間隔',
       set_auto_break:   '休憩を自動スタート',
       set_auto_pomo:    'ポモドーロを自動スタート',
+      set_volume:       '音量',
+      set_end_sound:    '終了音',
+      sound_hato:       '鳩時計',
+      sound_niwatori:   'ニワトリの鳴き声',
+      sound_inu:        '犬の鳴き声',
+      sound_neko:       '猫の鳴き声',
       btn_apply:        '適用',
 
       /* todo */
@@ -169,6 +175,12 @@ window.I18n = (() => {
       set_interval:    'Long Break Interval',
       set_auto_break:  'Auto-start Breaks',
       set_auto_pomo:   'Auto-start Pomodoro',
+      set_volume:      'Volume',
+      set_end_sound:   'End Sound',
+      sound_hato:      'Cuckoo Clock',
+      sound_niwatori:  'Rooster',
+      sound_inu:       'Dog Bark',
+      sound_neko:      'Cat Meow',
       btn_apply:       'Apply',
 
       todo_title:      'Tasks',
@@ -279,6 +291,12 @@ window.I18n = (() => {
       set_interval:    '长休息间隔',
       set_auto_break:  '自动开始休息',
       set_auto_pomo:   '自动开始番茄钟',
+      set_volume:      '音量',
+      set_end_sound:   '结束音',
+      sound_hato:      '布谷鸟钟',
+      sound_niwatori:  '公鸡叫声',
+      sound_inu:       '狗叫声',
+      sound_neko:      '猫叫声',
       btn_apply:       '应用',
 
       todo_title:      '任务',
