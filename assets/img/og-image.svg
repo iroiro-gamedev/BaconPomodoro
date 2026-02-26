@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1c1c28"/>
+
+  <!-- Subtle outer glow ring -->
+  <circle cx="600" cy="232" r="195" fill="none" stroke="#e05c5c" stroke-width="2" opacity="0.10"/>
+
+  <!-- Timer circle (filled) -->
+  <circle cx="600" cy="232" r="138" fill="#252535" stroke="#e05c5c" stroke-width="11"/>
+
+  <!-- Progress arc ~70% — decorative -->
+  <circle cx="600" cy="232" r="138" fill="none" stroke="#e05c5c" stroke-width="11"
+          stroke-dasharray="609 258" stroke-dashoffset="0" stroke-linecap="round"
+          transform="rotate(-90 600 232)" opacity="0.35"/>
+
+  <!-- Crown / timer button -->
+  <rect x="571" y="78" width="58" height="30" rx="15" fill="#e05c5c"/>
+
+  <!-- Minute hand (12 o'clock) -->
+  <line x1="600" y1="232" x2="600" y2="148" stroke="#e05c5c" stroke-width="9" stroke-linecap="round"/>
+  <!-- Hour hand (2 o'clock) -->
+  <line x1="600" y1="232" x2="664" y2="272" stroke="#e8e8f0" stroke-width="7" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="600" cy="232" r="11" fill="#e8e8f0"/>
+
+  <!-- Site name -->
+  <text x="600" y="442"
+        text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
+        font-size="80" font-weight="800" fill="#e8e8f0" letter-spacing="-1">BaconPomodoro</text>
+
+  <!-- Tagline -->
+  <text x="600" y="508"
+        text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
+        font-size="30" fill="#888899">Pomodoro Timer &amp; Todo List</text>
+
+  <!-- Accent bar -->
+  <rect x="548" y="538" width="104" height="4" rx="2" fill="#e05c5c"/>
+</svg>

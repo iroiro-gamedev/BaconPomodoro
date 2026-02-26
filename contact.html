@@ -5,21 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>お問い合わせ - BaconPomodoro</title>
   <meta name="description" content="BaconPomodoroへのお問い合わせ。不具合報告・ご意見・ご要望はこちらからどうぞ。" />
+
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/Image/BaconSeries_icon.png" />
+  <link rel="apple-touch-icon"           href="assets/Image/BaconSeries_icon.png" />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="BaconPomodoro" />
+  <meta property="og:title"       content="お問い合わせ - BaconPomodoro" />
+  <meta property="og:description" content="BaconPomodoroへのお問い合わせ。不具合報告・ご意見・ご要望はこちらからどうぞ。" />
+  <meta property="og:url"         content="https://baconpomodoro.com/contact.html" />
+  <meta property="og:image"       content="https://baconpomodoro.com/assets/Image/BaconPomodoro_OPGCard.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="600" />
+  <meta property="og:locale"      content="ja_JP" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@iroiro_GameDev" />
+  <meta name="twitter:title"       content="お問い合わせ - BaconPomodoro" />
+  <meta name="twitter:description" content="BaconPomodoroへのお問い合わせ。不具合報告・ご意見・ご要望はこちらからどうぞ。" />
+  <meta name="twitter:image"       content="https://baconpomodoro.com/assets/Image/BaconPomodoro_OPGCard.png" />
+
+  <meta name="theme-color" content="#1c1c28" />
+
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body data-page="contact">
 
   <header class="site-header">
     <a href="index.html" class="site-logo">
-      <span class="logo-icon">🥓</span>
+      <img class="logo-icon" src="assets/Image/BaconSeries_icon.png" alt="" />
       <span class="logo-text">Bacon<span class="accent">Pomodoro</span></span>
     </a>
-    <nav class="site-nav">
+    <nav class="site-nav" id="siteNav">
       <a href="about.html"   data-i18n="nav_about">About</a>
       <a href="privacy.html" data-i18n="nav_privacy">プライバシーポリシー</a>
       <a href="contact.html" data-i18n="nav_contact">お問い合わせ</a>
-      <button id="langBtn" class="lang-btn">日本語</button>
     </nav>
+    <div class="header-actions">
+      <button id="langBtn" class="lang-btn">日本語</button>
+      <button class="hamburger" id="hamburger" aria-label="メニュー" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <div class="page-wrapper">
@@ -74,5 +101,6 @@
   </footer>
 
   <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
 </body>
 </html>

@@ -33,6 +33,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  flex-wrap: wrap; /* allow nav row to wrap on mobile */
 }
 
 .site-logo {
@@ -44,7 +45,7 @@ body {
   flex-shrink: 0;
   margin-right: auto;
 }
-.site-logo .logo-icon { font-size: 1.3rem; line-height: 1; }
+.site-logo .logo-icon { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
 .site-logo .logo-text { font-size: 1rem; font-weight: 700; letter-spacing: 0.02em; }
 .site-logo .accent { color: var(--accent); }
 
@@ -81,6 +82,74 @@ body {
   flex-shrink: 0;
 }
 .lang-btn:hover { color: var(--text); border-color: var(--accent); }
+
+/* ─── Header actions (lang + hamburger) ─── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ─── Hamburger button ─── */
+.hamburger {
+  display: none; /* hidden on desktop */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 7px 6px;
+  border-radius: 6px;
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+.hamburger:hover { background: var(--surface2); }
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+/* ☰ → ✕ animation */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── Mobile nav ─── */
+@media (max-width: 700px) {
+  .hamburger { display: flex; }
+
+  .site-nav {
+    order: 10;          /* wraps to the row below logo + actions */
+    flex: 0 0 100%;
+    flex-direction: column;
+    align-items: stretch;
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 6px 0 8px;
+    margin-top: 6px;
+    gap: 2px;
+  }
+  .site-nav.open {
+    display: flex;
+    animation: navSlideDown 0.2s ease;
+  }
+  .site-nav a {
+    padding: 10px 12px;
+    font-size: 0.88rem;
+    white-space: normal;
+  }
+}
+
+@keyframes navSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 /* ─── Page wrapper ─── */
 .page-wrapper {
