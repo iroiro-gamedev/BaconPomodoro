@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"require\\(''sharp''\\)\")",
+      "Bash(node --version)",
+      "Bash(cmd.exe /c \"node --version\")",
+      "Bash(cmd.exe /c \"where node\")",
+      "Bash(powershell.exe -Command \"node --version; npx --version\")",
+      "Bash(powershell.exe -Command \"python --version\")",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "Glob(*)",
+      "Grep(*)"
+    ]
+  }
+}

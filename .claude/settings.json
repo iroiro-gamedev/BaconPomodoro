@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -Command \"python3 -c ''import cairosvg; print\\(\"\"cairosvg ok\"\"\\)''\")",
+      "Bash(powershell.exe -Command \"Get-Command inkscape, magick, rsvg-convert, convert -ErrorAction SilentlyContinue | Select-Object Name, Source\")"
+    ]
+  }
+}

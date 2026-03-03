@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>SVG → PNG Converter</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #1c1c28; color: #e8e8f0; padding: 40px; display: flex; flex-direction: column; gap: 40px; align-items: center; }
+    h1 { font-size: 1.2rem; margin: 0; }
+    .item { background: #252535; border: 1px solid #3a3a52; border-radius: 12px; padding: 24px 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    canvas { border: 1px solid #3a3a52; border-radius: 8px; }
+    button { background: #e05c5c; color: #fff; border: none; border-radius: 8px; padding: 10px 28px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+    button:hover { filter: brightness(1.15); }
+    p { margin: 0; font-size: 0.8rem; color: #888899; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>SVG → PNG 変換ツール（一時ファイル）</h1>
+
+  <div class="item">
+    <p>favicon.png（512×512）</p>
+    <canvas id="c1" width="512" height="512"></canvas>
+    <button onclick="download('c1','favicon.png')">favicon.png をダウンロード</button>
+    <p>ダウンロード後 → <code>assets/img/favicon.png</code> に保存</p>
+  </div>
+
+  <div class="item">
+    <p>og-image.png（1200×630）</p>
+    <canvas id="c2" width="1200" height="630"></canvas>
+    <button onclick="download('c2','og-image.png')">og-image.png をダウンロード</button>
+    <p>ダウンロード後 → <code>assets/img/og-image.png</code> に保存</p>
+  </div>
+
+  <script>
+    function renderSVGToCanvas(svgPath, canvasId) {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      img.src = svgPath;
+    }
+
+    function download(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const a = document.createElement('a');
+      a.download = filename;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    }
+
+    renderSVGToCanvas('assets/img/favicon.svg',  'c1');
+    renderSVGToCanvas('assets/img/og-image.svg', 'c2');
+  </script>
+</body>
+</html>
